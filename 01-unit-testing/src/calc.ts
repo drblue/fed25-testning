@@ -1,5 +1,5 @@
 /**
- * Add three numbers and return the sum
+ * Add any numbers and return the sum
  */
 export const add = (...numbers: number[]) => {
 	/*
@@ -15,5 +15,14 @@ export const add = (...numbers: number[]) => {
 	// 🤩
 	return numbers.reduce((total, current) => {
 		return total + current;
+	}, 0);
+}
+
+/**
+ * Subtract any numbers from each other and return the sum 🤯
+ */
+export const sub = (...numbers: number[]) => {
+	return numbers.reduce((sum, current) => {
+		return sum - current;
 	}, 0);
 }
