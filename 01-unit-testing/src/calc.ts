@@ -1,6 +1,12 @@
 /**
- * Add two numbers and return the sum
+ * Add three numbers and return the sum
  */
-export const add = (a: number, b: number) => {
-	return a + b;
+export const add = (...numbers: number[]) => {
+	// 🥴
+	let sum = 0;
+	for (let i = 0; i < numbers.length; i++) {
+		sum += numbers[i];
+	}
+
+	return sum;
 }
