@@ -1,9 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { clone } from "../arrays";
 
 describe("clones an array", () => {
 	const a = ["i", "like", "unit", "tests"];
-	const b = clone(a);
+	let b: any[] = [];
+
+	beforeEach(() => {
+		b = clone(a);
+	});
 
 	it("contains the same number of items", () => {
 		expect(b).toHaveLength(a.length);

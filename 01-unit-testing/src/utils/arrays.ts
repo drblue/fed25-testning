@@ -9,6 +9,7 @@
  * @returns Cloned array
  */
 export const clone = (arr: any[]) => {
+	console.log("Cloning array 👩‍🔬...");
 	return [...arr];
 	// return Array.from(arr);
 }
