@@ -1,0 +1,42 @@
+$body-color: #343a40;
+
+@import "bootstrap/scss/bootstrap";
+
+#app {
+}
+
+.hide {
+	display: none;
+}
+
+#todos {
+	background-color: $gray-700;
+	padding: 2rem;
+
+	.todo {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		color: $gray-300;
+
+		&.completed {
+			.todo-title {
+				text-decoration: line-through;
+				color: #888;
+			}
+		}
+
+		&:hover {
+			background-color: $gray-800;
+
+		}
+		.todo-title:hover {
+			color: $gray-100;
+			cursor: pointer;
+		}
+	}
+}
