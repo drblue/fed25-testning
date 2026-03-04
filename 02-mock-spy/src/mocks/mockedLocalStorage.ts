@@ -7,7 +7,11 @@ const storage = new Map();
 
 export const getMockedLocalStorage = (): Storage => {
 	return {
-		getItem: (key: string) => storage.get(key) ?? null,
+		getItem: (key: string) => {
+			console.log("getItem from mockedLocalStorage was called");
+
+			return storage.get(key) ?? null;
+		},
 
 		setItem: (key: string, value: string) => storage.set(key, value),
 
