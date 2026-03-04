@@ -1,3 +1,4 @@
+import type { Result } from "../types/Result";
 import type { Todo } from "../types/Todo";
 
 /**
@@ -19,7 +20,7 @@ export const getTodos = (): Todo[] => {
  *
  * @param todos Todos-array
  */
-export const saveTodos = (todos: Todo[]) => {
+export const saveTodos = (todos: Todo[]): Result => {
 	try {
 		// convert todos-array to JSON
 		const json = JSON.stringify(todos);
