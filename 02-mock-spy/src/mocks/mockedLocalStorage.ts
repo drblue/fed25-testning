@@ -1,21 +1,23 @@
 /**
- * A (mostly complete) mock of localStorage
+ * A complete mock of localStorage
  *
  */
 
 const storage = new Map();
 
-export const getMockedLocalStorage = () => {
+export const getMockedLocalStorage = (): Storage => {
 	return {
 		getItem: (key: string) => storage.get(key) ?? null,
 
 		setItem: (key: string, value: string) => storage.set(key, value),
 
-		length: storage.size,  // this won't update, but isn't needed for our app either
+		get length() {
+			return storage.size;
+		},
 
 		clear: () => storage.clear(),
 
-		key: () => null,  // this won't work either, but also isn't needed for our app
+		key: (index: number) => Array.from(storage.keys())[index] ?? null,
 
 		removeItem: (key: string) => storage.delete(key),
 	}
