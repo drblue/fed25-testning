@@ -1,9 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { getTodos } from "../utils/todoStorage";
 import { getMockedLocalStorage } from "../mocks/mockedLocalStorage";
+import type { Todo } from "../types/Todo";
+import { getTodos } from "../utils/todoStorage";
 
 // Reference to the original localStorage
 let originalLocalStorage: Storage;
+
+const TODO: Todo = {
+	id: 1,
+	title: "My first todo",
+	completed: false,
+}
 
 beforeEach(() => {
 	// Save a reference to the original localStorage before each test
@@ -27,7 +34,13 @@ describe("get todos", () => {
 });
 
 describe("save todos", () => {
-	it.todo("can save a todo", () => {});
+	it.todo("can save a todo", () => {
+		// save TODO and sure it's ok
+		// i.e. test `saveTodos`
+	});
 
-	it.todo("can save a todo and then retrieve it", () => {});
+	it.todo("can save a todo and then retrieve it", () => {
+		// save TODO and then make sure we can retrieve it
+		// i.e. test `saveTodos` and check that the saved todo exists when invoking `getTodos`
+	});
 });
