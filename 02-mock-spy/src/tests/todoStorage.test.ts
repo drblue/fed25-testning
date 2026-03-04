@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { getTodos } from "../utils/todoStorage";
 
 describe("get todos", () => {
-	it.todo("returns empty list of todos", () => {});
+	it("returns empty list of todos", () => {
+		const todos = getTodos();
+
+		expect(todos).toHaveLength(0);
+	});
 });
 
 describe("save todos", () => {
