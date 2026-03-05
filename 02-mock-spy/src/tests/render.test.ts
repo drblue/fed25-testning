@@ -31,4 +31,10 @@ describe("transform todos", () => {
 		const liEls = ulEl.querySelectorAll("li.todo");
 		expect(liEls).toHaveLength(1);
 	});
+
+	it.todo("should output list with many todo", () => {});
+
+	it.todo("should output list with one completed todo", () => {});
+
+	it.todo("should output list with one todo that isn't completed", () => {});
 });
