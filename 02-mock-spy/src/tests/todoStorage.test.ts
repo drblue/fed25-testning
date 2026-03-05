@@ -1,10 +1,9 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getMockedLocalStorage } from "../mocks/mockedLocalStorage";
+/**
+ * @vitest-environment happy-dom
+ */
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Todo } from "../types/Todo";
 import { getTodos, saveTodos } from "../utils/todoStorage";
-
-// Reference to the original localStorage
-let originalLocalStorage: Storage;
 
 const TODO: Todo = {
 	id: 1,
@@ -12,17 +11,10 @@ const TODO: Todo = {
 	completed: false,
 }
 
+// Reset the environment so tests aren't dependent on each other
 beforeEach(() => {
-	// Save a reference to the original localStorage before each test
-	originalLocalStorage = globalThis.localStorage;
-
-	// Replace localStorage with our mocked version
-	globalThis.localStorage = getMockedLocalStorage();
-});
-
-afterEach(() => {
-	// Restore localStorage to the original version
-	globalThis.localStorage = originalLocalStorage;
+	// 🧹 Clear localStorage so we have a deterministic environment
+	globalThis.localStorage.clear();
 });
 
 describe("get todos", () => {
