@@ -29,7 +29,34 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it.todo("should create a todo and then get the todo", () => {});
+	it("should create a todo and then get the todo", async () => {
+		// create a new todo
+		const createdTodo = await TodoAPI.createTodo(newTodo);
+
+		// try to get the new todo
+		const todo = await TodoAPI.getTodo(createdTodo.id);
+
+		// assert that the retrieved todo looks like createdTodo
+		/*
+		// 😒
+		expect(todo.id).toBe(createdTodo.id);
+		expect(todo.title).toBe(createdTodo.title);
+		expect(todo.completed).toBe(createdTodo.completed);
+		*/
+
+		/*
+		// 😳
+		expect(todo).toMatchObject({
+			id: createdTodo.id,
+			title: createdTodo.title,
+			completed: createdTodo.completed,
+		});
+		expect(todo).toMatchObject(createdTodo);
+		*/
+
+		// expect both todos to have the same keys + values
+		expect(todo).toStrictEqual(createdTodo);
+	});
 
 	it.todo("should create a todo and find the todo among all todos", () => {});
 
