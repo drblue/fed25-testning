@@ -58,7 +58,22 @@ describe("TodoAPI", () => {
 		expect(todo).toStrictEqual(createdTodo);
 	});
 
-	it.todo("should create a todo and find the todo among all todos", () => {});
+	it("should create a todo and find the todo among all todos", async () => {
+		// create a new todo
+		const createdTodo = await TodoAPI.createTodo(newTodo);
+
+		// get all dem todos
+		const todos = await TodoAPI.getTodos();
+
+		// expect created todo to exist in the array of all todos
+		/*
+		const foundTodo = todos.find(todo => todo.id === createdTodo.id);
+		expect(foundTodo).toStrictEqual(createdTodo);
+		*/
+
+		// expect(todos).toEqual( expect.arrayContaining([ createdTodo ]) );
+		expect(todos).toContainEqual(createdTodo);
+	});
 
 	it.todo("should create a todo and then update the todo", () => {});
 
