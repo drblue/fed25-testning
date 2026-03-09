@@ -5,7 +5,7 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
 	{
-		ignores: ["coverage/**", "dist/**"],
+		ignores: ["coverage/**", "dist/**", "src/services/FetchVsAxios"],
 	},
 	{
 		files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
