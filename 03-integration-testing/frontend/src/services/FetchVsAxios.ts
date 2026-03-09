@@ -3,7 +3,31 @@
  * THIS IS NOT IN USE AND ONLY FOR DEMONSTRATING
  * THE DIFFERENCE BETWEEN fetch AND axios
  */
+import axios from "axios";
 import type { Todo, TodoData } from "../types/Todo";
+
+const newTodo: TodoData = { title: "My new Todo", completed: false }
+
+const get = async <T>(url: string) => {
+	const res = await axios.get<T>(url);
+	return res.data;
+}
+
+const getTodos = () => {
+	return get<Todo[]>("http://localhost:3001/todos");
+}
+
+const post = async <ResponseType, PayloadType>(url: string, payload: PayloadType) => {
+	const res = await axios.post<ResponseType>(url, payload);
+	return res.data;
+}
+
+const createTodo = (data: TodoData) => {
+	return post<Todo, TodoData>("http://localhost:3001/todos", data);
+}
+
+// const res = await createTodo(newTodo);
+// //    ^?
 
 const fetchGet = async <T>(url: string) => {
 	const res = await fetch(url);
@@ -38,8 +62,6 @@ const fetchPost = async <ResponseType, PayloadType>(url: string, payload: Payloa
 
 	return data;
 }
-
-const newTodo: TodoData = { title: "My new Todo", completed: false }
 
 // const res = await fetchPost<Todo, TodoData>("http://localhost:3001/todos", newTodo)
 // //    ^?
