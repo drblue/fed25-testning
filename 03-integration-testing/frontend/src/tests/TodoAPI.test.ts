@@ -129,6 +129,11 @@ describe("TodoAPI", () => {
 		expect(todos).not.toContainEqual(createdTodo);
 	});
 
-	it.todo("should throw an error when trying to get a todo that does not exist", () => {});
+	it("should throw an error when trying to get a todo that does not exist", async () => {
+		// expect an error to be thrown
+		await expect(
+			TodoAPI.getTodo(99999)
+		).rejects.toThrowError();
+	});
 
 });
