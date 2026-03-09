@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
 import * as TodoAPI from "../services/TodoAPI";
+import type { TodoData } from "../types/Todo";
+
+const newTodo: TodoData = { title: "Test todo", completed: false };
 
 describe("TodoAPI", () => {
 
@@ -9,7 +12,22 @@ describe("TodoAPI", () => {
 		expect( Array.isArray(todos) ).toBe(true);
 	});
 
-	it.todo("should create a todo", () => {});
+	it("should create a todo", async () => {
+		const createdTodo = await TodoAPI.createTodo(newTodo);
+
+		/*
+		// expect(typeof createdTodo.id).toBe("number");  // 😑
+		expect(createdTodo.id).toBeTypeOf("number");  // 🫤
+		expect(createdTodo.title).toBe(newTodo.title);
+		expect(createdTodo.completed).toBe(newTodo.completed);
+		*/
+
+		expect(createdTodo).toMatchObject({
+			id: expect.any(Number),
+			title: newTodo.title,
+			completed: newTodo.completed,
+		});
+	});
 
 	it.todo("should create a todo and then get the todo", () => {});
 
