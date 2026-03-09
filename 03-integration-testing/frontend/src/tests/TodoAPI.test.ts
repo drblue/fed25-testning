@@ -1,8 +1,38 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import * as TodoAPI from "../services/TodoAPI";
 import type { TodoData } from "../types/Todo";
 
 const newTodo: TodoData = { title: "Test todo", completed: false };
+
+// I'm a good cleaner 🧹
+const deleteAllTodos = async () => {
+	// get all todos
+	const todos = await TodoAPI.getTodos();
+
+	// delete them one by one 😩
+
+	// 🙅🏻‍♂️ forEach doesn't wait for promises to resolve before invoking next iteration
+	// todos.forEach(async todo => {
+	// 	await TodoAPI.deleteTodo(todo.id);
+	// });
+
+	// 🙂
+	// for (let i = 0; i < todos.length; i++) {
+	// 	const todo = todos[i];
+	// 	await TodoAPI.deleteTodo(todo.id);
+	// }
+
+	// 🤓
+	for (const todo of todos) {
+		await TodoAPI.deleteTodo(todo.id);
+	}
+}
+
+// Clean up before each test so we have a predictable environment
+beforeEach(deleteAllTodos);
+
+// Tidy up after ourselves
+afterEach(deleteAllTodos);
 
 describe("TodoAPI", () => {
 
