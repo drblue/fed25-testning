@@ -36,10 +36,11 @@ afterEach(deleteAllTodos);
 
 describe("TodoAPI", () => {
 
-	it("should return a list", async () => {
+	it("should return a empty list", async () => {
 		const todos = await TodoAPI.getTodos();
 
 		expect( Array.isArray(todos) ).toBe(true);
+		expect(todos).toHaveLength(0);
 	});
 
 	it("should create a todo", async () => {
