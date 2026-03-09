@@ -119,7 +119,15 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it.todo("should create a todo and then delete the todo and verify that the todo was actually deleted", () => {});
+	it("should create a todo and then delete the todo and verify that the todo was actually deleted", async () => {
+		const createdTodo = await TodoAPI.createTodo(newTodo);
+
+		await TodoAPI.deleteTodo(createdTodo.id);
+
+		const todos = await TodoAPI.getTodos();
+
+		expect(todos).not.toContainEqual(createdTodo);
+	});
 
 	it.todo("should throw an error when trying to get a todo that does not exist", () => {});
 
