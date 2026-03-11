@@ -104,7 +104,7 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it.skip("should create a todo and then delete the todo and verify that the todo was actually deleted", async () => {
+	it("should create a todo and then delete the todo and verify that the todo was actually deleted", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		await TodoAPI.deleteTodo(createdTodo.id);
