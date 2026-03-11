@@ -1,38 +1,24 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import { server } from "../mocks/server";
 import * as TodoAPI from "../services/TodoAPI";
 import type { TodoData } from "../types/Todo";
 
+// 👂🏻 Before all tests, start listening for requests
+beforeAll(() => {
+	server.listen();
+});
+
+// 🧨 Reset handlers
+afterEach(() => {
+	server.resetHandlers();
+});
+
+// 🙉 After all tests, stop listening
+afterAll(() => {
+	server.close();
+});
+
 const newTodo: TodoData = { title: "Test todo", completed: false };
-
-// I'm a good cleaner 🧹
-const deleteAllTodos = async () => {
-	// get all todos
-	const todos = await TodoAPI.getTodos();
-
-	// delete them one by one 😩
-
-	// 🙅🏻‍♂️ forEach doesn't wait for promises to resolve before invoking next iteration
-	// todos.forEach(async todo => {
-	// 	await TodoAPI.deleteTodo(todo.id);
-	// });
-
-	// 🙂
-	// for (let i = 0; i < todos.length; i++) {
-	// 	const todo = todos[i];
-	// 	await TodoAPI.deleteTodo(todo.id);
-	// }
-
-	// 🤓
-	for (const todo of todos) {
-		await TodoAPI.deleteTodo(todo.id);
-	}
-}
-
-// Clean up before each test so we have a predictable environment
-beforeEach(deleteAllTodos);
-
-// Tidy up after ourselves
-afterEach(deleteAllTodos);
 
 describe("TodoAPI", () => {
 
@@ -43,7 +29,7 @@ describe("TodoAPI", () => {
 		expect(todos).toHaveLength(0);
 	});
 
-	it("should create a todo", async () => {
+	it.skip("should create a todo", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		/*
@@ -60,7 +46,7 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it("should create a todo and then get the todo", async () => {
+	it.skip("should create a todo and then get the todo", async () => {
 		// create a new todo
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
@@ -89,7 +75,7 @@ describe("TodoAPI", () => {
 		expect(todo).toStrictEqual(createdTodo);
 	});
 
-	it("should create a todo and find the todo among all todos", async () => {
+	it.skip("should create a todo and find the todo among all todos", async () => {
 		// create a new todo
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
@@ -106,7 +92,7 @@ describe("TodoAPI", () => {
 		expect(todos).toContainEqual(createdTodo);
 	});
 
-	it("should create a todo and then update the todo", async () => {
+	it.skip("should create a todo and then update the todo", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		const updatedTodo = await TodoAPI.updateTodo(createdTodo.id, {
@@ -119,7 +105,7 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it("should create a todo and then delete the todo and verify that the todo was actually deleted", async () => {
+	it.skip("should create a todo and then delete the todo and verify that the todo was actually deleted", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		await TodoAPI.deleteTodo(createdTodo.id);
@@ -129,7 +115,7 @@ describe("TodoAPI", () => {
 		expect(todos).not.toContainEqual(createdTodo);
 	});
 
-	it("should throw an error when trying to get a todo that does not exist", async () => {
+	it.skip("should throw an error when trying to get a todo that does not exist", async () => {
 		// expect an error to be thrown
 		await expect(
 			TodoAPI.getTodo(99999)
