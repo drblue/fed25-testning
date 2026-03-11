@@ -27,4 +27,10 @@ describe("Newsletter Subscribe Form", () => {
 			.should("exist")
 			.contains(email);
 	});
+
+	it.skip("displays an error message when the email is invalid");
+
+	it.skip("should not allow users to subscribe twice");
+
+	it.skip("should not allow subscribing without an email address");
 });
