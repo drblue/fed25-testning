@@ -14,16 +14,27 @@ describe("Newsletter Subscribe Form", () => {
 	});
 
 	context("Happy paths", () => {
-		it("allows users to subscribe to the email list", () => {
+		it("allows users to subscribe to the email list by clicking the button", () => {
 			// ✍🏻
 			cy.getByDataTest("email-input")
 				.should("be.visible")
-				.type(email);
+				.type(email, { delay: 100 });  // Take it chill
 
 			// 👆🏻
 			cy.getByDataTest("submit-button").click();
 
 			// 🥳❔
+			cy.getByDataTest("success-message")
+				.should("exist")
+				.contains(email);
+		});
+
+		it("allows users to subscribe to the email list by pressing the enter key", () => {
+			cy.getByDataTest("email-input")
+				.should("be.visible")
+				.type(email)
+				.type("{enter}");
+
 			cy.getByDataTest("success-message")
 				.should("exist")
 				.contains(email);
