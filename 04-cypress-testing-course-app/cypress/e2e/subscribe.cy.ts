@@ -9,15 +9,15 @@ describe("Newsletter Subscribe Form", () => {
 
 	it("allows users to subscribe to the email list", () => {
 		// ✍🏻
-		cy.get('[data-test="email-input"]')
+		cy.getByDataTest("email-input")
 			.should("be.visible")
 			.type("pelle@svanslos.nu");
 
 		// 👆🏻
-		cy.get('[data-test="submit-button"]').click();
+		cy.getByDataTest("submit-button").click();
 
 		// 🥳❔
-		cy.get('[data-test="success-message"]')
+		cy.getByDataTest("success-message")
 			.should("exist")
 			.contains("pelle@svanslos.nu");
 	});
