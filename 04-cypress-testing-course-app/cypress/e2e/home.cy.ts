@@ -26,4 +26,19 @@ describe("Home Page", () => {
 			cy.get("dt").eq(2).contains("Free and Open Source");
 		});
 	});
+
+	context("Courses section", () => {
+		it("Course: Testing Your First Next.js Application", () => {
+			// Find link with text "Get started" and click on it
+			cy.getByDataTest("course-0")
+				.find("a")
+				// .contains("Get started")
+				.eq(-1)  // alternative way, gets the last element from the array
+				.click();
+
+			// Make sure we're redirected to the correct page
+			cy.location("pathname")
+				.should("equal", "/testing-your-first-application");
+		});
+	});
 });
