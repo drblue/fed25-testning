@@ -28,7 +28,7 @@ describe("TodoAPI", () => {
 		expect( Array.isArray(todos) ).toBe(true);
 	});
 
-	it.skip("should create a todo", async () => {
+	it("should create a todo", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		/*
@@ -74,7 +74,7 @@ describe("TodoAPI", () => {
 		expect(todo).toStrictEqual(createdTodo);
 	});
 
-	it.skip("should create a todo and find the todo among all todos", async () => {
+	it("should create a todo and find the todo among all todos", async () => {
 		// create a new todo
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
