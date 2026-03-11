@@ -28,9 +28,24 @@ describe("Newsletter Subscribe Form", () => {
 			.contains(email);
 	});
 
-	it.skip("displays an error message when the email is invalid");
+	it("displays an error message when the email is invalid", () => {
+		cy.getByDataTest("email-input").type(invalidEmail);
+		cy.getByDataTest("submit-button").click();
+		cy.getByDataTest("success-message").should("not.exist");
+	});
 
-	it.skip("should not allow users to subscribe twice");
+	it("should not allow users to subscribe twice", () => {
+		cy.getByDataTest("email-input").type(existingSubscriberEmail);
+		cy.getByDataTest("submit-button").click();
+		cy.getByDataTest("server-error-message")
+			.should("be.visible")
+			.contains(existingSubscriberEmail);
+	});
 
-	it.skip("should not allow subscribing without an email address");
+	it("should not allow subscribing without an email address", () => {
+		cy.getByDataTest("submit-button").click();
+		cy.getByDataTest("error-message")
+			.should("be.visible")
+			.contains("Email is required");
+	});
 });
