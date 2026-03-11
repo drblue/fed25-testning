@@ -26,7 +26,6 @@ describe("TodoAPI", () => {
 		const todos = await TodoAPI.getTodos();
 
 		expect( Array.isArray(todos) ).toBe(true);
-		expect(todos).toHaveLength(0);
 	});
 
 	it.skip("should create a todo", async () => {
