@@ -10,6 +10,9 @@ const dummyTodos: Todo[] = [
 ];
 
 type CreateTodoRequestBody = TodoData;
+type TodoParams = {
+	todoId: string;
+}
 
 // Array containing all our request handlers
 export const handlers = [
@@ -22,6 +25,21 @@ export const handlers = [
 
 	// Mock get single todo
 	// GET http://localhost:3001/todos/:todoId
+	http.get<TodoParams>(BASE_URL + "/todos/:todoId", ({ params }) => {
+		// Get the todo ID from the request parameters
+		const todoId = Number(params.todoId);
+
+		// Check if a todo with that ID exists
+		const todo = dummyTodos.find(todo => todo.id === todoId);
+
+		// If not, respond with empty object and HTTP 404 Not Found
+		if (!todo) {
+			return HttpResponse.json({}, { status: 404 });
+		}
+
+		// Otherwise, respond with the todo with the corresponding ID
+		return HttpResponse.json(todo);
+	}),
 
 	// Mock create todo
 	// POST http://localhost:3001/todos

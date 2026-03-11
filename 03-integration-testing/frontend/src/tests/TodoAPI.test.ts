@@ -45,7 +45,7 @@ describe("TodoAPI", () => {
 		});
 	});
 
-	it.skip("should create a todo and then get the todo", async () => {
+	it("should create a todo and then get the todo", async () => {
 		// create a new todo
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
