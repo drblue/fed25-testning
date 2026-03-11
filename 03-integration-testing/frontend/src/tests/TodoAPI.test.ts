@@ -91,7 +91,7 @@ describe("TodoAPI", () => {
 		expect(todos).toContainEqual(createdTodo);
 	});
 
-	it.skip("should create a todo and then update the todo", async () => {
+	it("should create a todo and then update the todo", async () => {
 		const createdTodo = await TodoAPI.createTodo(newTodo);
 
 		const updatedTodo = await TodoAPI.updateTodo(createdTodo.id, {
