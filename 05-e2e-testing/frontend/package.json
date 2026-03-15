@@ -21,6 +21,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.18",
     "bootstrap": "^5.3.8",
+    "cypress": "^15.12.0",
     "eslint": "^10.0.2",
     "globals": "^17.4.0",
     "happy-dom": "^20.8.3",
