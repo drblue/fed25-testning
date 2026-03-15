@@ -12,7 +12,9 @@ describe("Todos", () => {
 	});
 
 	context("Create todo", () => {
-		it.skip("create todo form should be empty");
+		it.only("create todo form should be empty", () => {
+			cy.get("input[type=\"text\"]").should("have.value", "");
+		});
 
 		it.skip("can't create a todo without a title");
 
