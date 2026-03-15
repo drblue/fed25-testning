@@ -13,7 +13,7 @@ describe("Todos", () => {
 		});
 
 		it("should not show error dialog", () => {
-			cy.get('#error')
+			cy.get("[role=\"alert\"]")
 				.should("not.be.visible");
 		});
 	});
@@ -27,7 +27,7 @@ describe("Todos", () => {
 			// cy.get("input[type=\"text\"]").type("{enter}");
 			cy.get("[type=\"submit\"]").click();
 
-			cy.get('#error')
+			cy.get("[role=\"alert\"]")
 				.should("be.visible")
 				.contains("Title cannot be empty");
 				// .contains(/title cannot be empty/i);
