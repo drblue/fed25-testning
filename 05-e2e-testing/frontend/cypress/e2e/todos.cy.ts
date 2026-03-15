@@ -16,7 +16,7 @@ describe("Todos", () => {
 			cy.get("input[type=\"text\"]").should("have.value", "");
 		});
 
-		it.only("can't create a todo without a title", () => {
+		it("can't create a todo without a title", () => {
 			// cy.get("input[type=\"text\"]").type("{enter}");
 			cy.get("[type=\"submit\"]").click();
 
@@ -26,7 +26,26 @@ describe("Todos", () => {
 				// .contains(/title cannot be empty/i);
 		});
 
-		it.skip("can create a new todo, input-field is cleared and todo appears in the list");
+		it.only("can create a new todo, input-field is cleared and todo appears in the list", {
+			defaultCommandTimeout: 10000,  // wait **up to** 10 seconds when looking for an element
+		}, () => {
+			const todoTitle = "Too many todos, didn't read " + Date.now();
+
+			// type todo title and then submit form by pressing the enter-key
+			cy.get("input[type=\"text\"]")
+				.type(todoTitle)
+				.type("{enter}");
+
+			// expect that a todo with the title exists (last) in the list
+			cy.get("#todos")
+				.find("li")
+				.last()
+				.contains(todoTitle);
+
+			// expect input to be empty
+			cy.get("input[type=\"text\"]")
+				.should("have.value", "");
+		});
 
 		it.skip("can type in the 'create todo' form and then reset the form");
 	});
