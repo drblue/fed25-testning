@@ -12,11 +12,19 @@ describe("Todos", () => {
 	});
 
 	context("Create todo", () => {
-		it.only("create todo form should be empty", () => {
+		it("create todo form should be empty", () => {
 			cy.get("input[type=\"text\"]").should("have.value", "");
 		});
 
-		it.skip("can't create a todo without a title");
+		it.only("can't create a todo without a title", () => {
+			// cy.get("input[type=\"text\"]").type("{enter}");
+			cy.get("[type=\"submit\"]").click();
+
+			cy.get('#error')
+				.should("be.visible")
+				.contains("Title cannot be empty");
+				// .contains(/title cannot be empty/i);
+		});
 
 		it.skip("can create a new todo, input-field is cleared and todo appears in the list");
 
