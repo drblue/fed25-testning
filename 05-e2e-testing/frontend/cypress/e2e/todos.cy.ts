@@ -26,7 +26,7 @@ describe("Todos", () => {
 				// .contains(/title cannot be empty/i);
 		});
 
-		it.only("can create a new todo, input-field is cleared and todo appears in the list", {
+		it("can create a new todo, input-field is cleared and todo appears in the list", {
 			defaultCommandTimeout: 10000,  // wait **up to** 10 seconds when looking for an element
 		}, () => {
 			const todoTitle = "Too many todos, didn't read " + Date.now();
@@ -47,6 +47,18 @@ describe("Todos", () => {
 				.should("have.value", "");
 		});
 
-		it.skip("can type in the 'create todo' form and then reset the form");
+		it.only("can type in the 'create todo' form and then reset the form", () => {
+			// type something in the input field
+			cy.get("input[type=\"text\"]")
+				.type("My ephemeral todo");
+
+			// click the reset button
+			cy.get("[type=\"reset\"]")
+				.click();
+
+			// expect input to be empty
+			cy.get("input[type=\"text\"]")
+				.should("have.value", "");
+		});
 	});
 });
