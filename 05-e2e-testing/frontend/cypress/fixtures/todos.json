@@ -1,0 +1,12 @@
+[
+  { 
+    "id": 1,
+    "title": "I like todos and I cannot lie",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "title": "I like E2E-tests very much, and I lie",
+    "completed": false
+  }
+]

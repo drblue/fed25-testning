@@ -1,15 +1,46 @@
 describe("Todos", () => {
-	beforeEach(() => {
-		cy.visit("/");
-	});
+	context.only("Initial state", () => {
+		beforeEach(() => {
+			// Intercept GET requests to http://localhost:3001/todos
+			// Inline data is bad data 😤
+			/*
+			cy.intercept("GET", "http://localhost:3001/todos", [
+				{ id: 1337, title: "I like todos and I cannot lie", completed: false },
+			]).as("getTodos");
+			*/
 
-	context("Initial state", () => {
+			// Fixtures 🦿
+			cy.intercept("GET", "http://localhost:3001/todos", {
+				fixture: "todos.json",
+			}).as("getTodos");
+
+			cy.visit("/");
+		});
+
 		it("should be able to visit the page", () => {
 			cy.get("h1").contains("Todos");
 		});
 
-		it("should find at least one todo", () => {
-			cy.get("#todos").find("li").should("have.length.at.least", 1);
+		it("should find two mocked todos", () => {
+			// Wait for request to be intercepted before continuing with the test
+			// (not really need in this case, so just for demonstration purposes)
+			cy.wait("@getTodos");
+
+			cy.get("#todos")
+				.find("li")
+				.should("have.length", 2);
+
+			cy.get("#todos")
+				.find("li")
+				.first()
+				.should("have.class", "completed")
+				.contains("I like todos and I cannot lie");
+
+			cy.get("#todos")
+				.find("li")
+				.last()
+				.should("not.have.class", "completed")
+				.contains("I like E2E-tests very much, and I lie");
 		});
 
 		it("should not show error dialog", () => {
@@ -19,6 +50,10 @@ describe("Todos", () => {
 	});
 
 	context("Create todo", () => {
+		beforeEach(() => {
+			cy.visit("/");
+		});
+
 		it("create todo form should be empty", () => {
 			cy.get("input[type=\"text\"]").should("have.value", "");
 		});
