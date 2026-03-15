@@ -1,5 +1,5 @@
 describe("Todos", () => {
-	context.only("Initial state", () => {
+	context("Initial state", () => {
 		beforeEach(() => {
 			// Intercept GET requests to http://localhost:3001/todos
 			// Inline data is bad data 😤
@@ -101,6 +101,34 @@ describe("Todos", () => {
 			// expect input to be empty
 			cy.get("input[type=\"text\"]")
 				.should("have.value", "");
+		});
+	});
+
+	context.only("Todo ID", () => {
+		it("should get the first todo ID", () => {
+			// Visit the page
+			cy.visit("/");
+
+			/*
+			cy.get("#todos")
+				.find("li")
+				.first()
+				.invoke("attr", "data-todo-id")
+				.then(todoId => {
+					console.log("Todo Id of the first todo is:", todoId);
+				});
+			*/
+
+			cy.get("#todos")
+				.find("li")
+				.first()
+				.invoke("attr", "data-todo-id")
+				.as("todoId");
+
+			cy.get("@todoId").then(todoId => {
+				// Do something
+				console.log("Todo Id of the first todo is:", todoId);
+			});
 		});
 	});
 });
