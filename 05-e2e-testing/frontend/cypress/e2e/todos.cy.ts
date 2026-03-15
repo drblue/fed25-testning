@@ -3,12 +3,19 @@ describe("Todos", () => {
 		cy.visit("/");
 	});
 
-	it("should be able to visit the page", () => {
-		cy.get("h1").contains("Todos");
-	});
+	context("Initial state", () => {
+		it("should be able to visit the page", () => {
+			cy.get("h1").contains("Todos");
+		});
 
-	it("should find at least one todo", () => {
-		cy.get("#todos").find("li").should("have.length.at.least", 1);
+		it("should find at least one todo", () => {
+			cy.get("#todos").find("li").should("have.length.at.least", 1);
+		});
+
+		it("should not show error dialog", () => {
+			cy.get('#error')
+				.should("not.be.visible");
+		});
 	});
 
 	context("Create todo", () => {
@@ -47,7 +54,7 @@ describe("Todos", () => {
 				.should("have.value", "");
 		});
 
-		it.only("can type in the 'create todo' form and then reset the form", () => {
+		it("can type in the 'create todo' form and then reset the form", () => {
 			// type something in the input field
 			cy.get("input[type=\"text\"]")
 				.type("My ephemeral todo");
