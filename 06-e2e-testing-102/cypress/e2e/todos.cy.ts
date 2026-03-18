@@ -1,5 +1,5 @@
-describe("template spec", () => {
+describe("Firebase Todos", () => {
 	it("passes", () => {
-		cy.visit("https://example.cypress.io");
+		cy.visit("/");
 	});
 });
