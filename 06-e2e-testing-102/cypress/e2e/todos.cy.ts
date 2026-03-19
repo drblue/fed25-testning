@@ -30,5 +30,11 @@ describe("Firebase Todos", () => {
 
 			cy.location("pathname").should("equal", "/");
 		});
+
+		it("Can log in with an existing user and visit todos page", () => {
+			cy.login(snelhest.email, snelhest.password);
+			cy.visit("/todos");
+			cy.location("pathname").should("equal", "/todos");
+		});
 	});
 });
