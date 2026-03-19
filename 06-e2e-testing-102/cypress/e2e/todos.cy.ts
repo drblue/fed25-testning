@@ -1,3 +1,8 @@
+const snelhest = {
+	email: "snelhest2000@gmail.com",
+	password: "appapp",
+}
+
 describe("Firebase Todos", () => {
 	context("Can't access protected routes without authenticating first", () => {
 		it("Should redirect to login-page when trying to access todos", () => {
@@ -8,6 +13,27 @@ describe("Firebase Todos", () => {
 
 			// Check that URL is /login
 			cy.location("pathname").should("equal", "/login");
+		});
+	});
+
+	context("Can authenticate", () => {
+		beforeEach(() => {
+			cy.visit("/login");
+		});
+
+		afterEach(() => {
+			cy.visit("/logout");
+
+			// Make sure we've actually been logged out as it takes a small amount of time
+			cy.location("pathname").should("equal", "/login");
+		});
+
+		it("Can log in with an existing user", () => {
+			cy.get(`input[type="email"]`).type(snelhest.email, { delay: 10 });
+			cy.get(`input[type="password"]`).type(snelhest.password);
+			cy.get(`button[type="submit"]`).click();
+
+			cy.location("pathname").should("equal", "/");
 		});
 	});
 });
