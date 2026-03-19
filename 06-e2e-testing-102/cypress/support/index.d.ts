@@ -5,5 +5,11 @@ declare namespace Cypress {
 		 * @example cy.login("snel@hest.gov", "hö jette-gått")
 		 */
 		login(email: string, password: string): Chainable<void>;
+
+		/**
+		 * Custom command to log out the current user
+		 * @example cy.logout()
+		 */
+		logout(): Chainable<void>;
 	}
 }

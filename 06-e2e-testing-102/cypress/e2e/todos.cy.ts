@@ -22,10 +22,7 @@ describe("Firebase Todos", () => {
 		});
 
 		afterEach(() => {
-			cy.visit("/logout");
-
-			// Make sure we've actually been logged out as it takes a small amount of time
-			cy.location("pathname").should("equal", "/login");
+			cy.logout();
 		});
 
 		it("Can log in with an existing user", () => {
