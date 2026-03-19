@@ -37,4 +37,28 @@ describe("Firebase Todos", () => {
 			cy.location("pathname").should("equal", "/todos");
 		});
 	});
+
+	context.only("Todo actions", () => {
+		beforeEach(() => {
+			cy.visit("/login");
+			cy.login(snelhest.email, snelhest.password);
+
+			// Wait for login to succeed
+			cy.location("pathname").should("equal", "/");
+		});
+
+		afterEach(() => {
+			cy.logout();
+		});
+
+		it("All todos should have a title", () => {
+			cy.visit("/todos");
+
+			cy.get(".todolist .todo-title")
+				.each(($el) => {
+					// $el is a jQuery-wrapped element
+					cy.wrap($el).should("not.be.empty");
+				});
+		});
+	});
 });
