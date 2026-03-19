@@ -60,5 +60,24 @@ describe("Firebase Todos", () => {
 					cy.wrap($el).should("not.be.empty");
 				});
 		});
+
+		it.only("Should click on the first todo and the new URL should contain that todo's id", () => {
+			cy.visit("/todos");
+
+			// Get the first todo in the list
+			cy.get(".todolist .list-group-item")
+				.first()
+				.as("firstTodoItem")
+				.invoke("attr", "data-todo-id")
+				.then((todoId) => {
+					console.log("Todo ID of first todo is:", todoId);
+
+					// The same as `cy.get(".todolist .list-group-item").first().click()`
+					// but we have set an alias above using the `.as()` command
+					cy.get("@firstTodoItem").click();
+
+					cy.location("pathname").should("equal", "/todos/" + todoId);
+				});
+		});
 	});
 });
